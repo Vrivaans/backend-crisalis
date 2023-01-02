@@ -23,6 +23,10 @@ public class ServiciosContratados {
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_servicio")
+    private Servicios servicio;
+
     //Falta poner la relación con los servicios y falta poner en la de clientes la relación
 
 }

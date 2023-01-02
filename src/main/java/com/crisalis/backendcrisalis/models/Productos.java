@@ -1,7 +1,7 @@
 package com.crisalis.backendcrisalis.models;
 
 import javax.persistence.Entity;
-import javax.persistence.MappedSuperclass;
+//import javax.persistence.MappedSuperclass;
 
 @Entity
 public class Productos extends SuperClaseProductos {

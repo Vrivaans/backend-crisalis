@@ -1,7 +1,11 @@
 package com.crisalis.backendcrisalis.models;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Servicios extends SuperClaseProductos {
@@ -11,6 +15,9 @@ public class Servicios extends SuperClaseProductos {
 
     @Column(name = "es_especial")
     private boolean esEspecial;
+
+    @OneToMany(mappedBy = "servicio", cascade = CascadeType.ALL)
+    private List<ServiciosContratados> serviciosContratados;
 
     public Servicios(int id, float precioBase, String nombre, float soportePrecio, boolean esEspecial) {
         super(id, precioBase, nombre);

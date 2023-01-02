@@ -52,5 +52,12 @@ public class ClienteServices implements IClienteServices {
         List<Cliente> listaClientes = clienteRepository.findAll();
         return listaClientes;
     }
+
+    @Override
+    public boolean existsByDniCliente(int dniCliente) {
+        return clienteRepository.existsByDniCliente(dniCliente);
+    }
+
+    
     
 }
