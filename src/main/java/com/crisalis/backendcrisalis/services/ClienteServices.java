@@ -54,7 +54,7 @@ public class ClienteServices implements IClienteServices {
     }
 
     @Override
-    public boolean existsByDniCliente(int dniCliente) {
+    public boolean existsByDniCliente(String dniCliente) {
         return clienteRepository.existsByDniCliente(dniCliente);
     }
 

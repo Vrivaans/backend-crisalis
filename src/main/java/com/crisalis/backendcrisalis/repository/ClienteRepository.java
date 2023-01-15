@@ -9,7 +9,7 @@ import com.crisalis.backendcrisalis.models.Cliente;
 
 @Repository
 public interface ClienteRepository extends JpaRepository <Cliente, Integer> {
-    public boolean existsByDniCliente(int dniCliente);
+    public boolean existsByDniCliente(String dniCliente);
     //Para tratar de buscar cliente por dni
-    public Optional<Cliente> findByDniCliente(int dniCliente);
+    public Optional<Cliente> findByDniCliente(String dniCliente);
 }

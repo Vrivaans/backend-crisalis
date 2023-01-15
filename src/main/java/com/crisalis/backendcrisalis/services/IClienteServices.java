@@ -18,9 +18,9 @@ public interface IClienteServices {
 
     public List<Cliente>getClientes();
 
-    public boolean existsByDniCliente(int dniCliente);
+    public boolean existsByDniCliente(String dniCliente);
 
-    //public Optional<Cliente>findByDniCliente(int dniCliente);
+    //public Optional<Cliente>findByDniCliente(String dniCliente);
 
     
 }

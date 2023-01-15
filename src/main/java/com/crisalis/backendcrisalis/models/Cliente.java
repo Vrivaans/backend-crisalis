@@ -24,13 +24,15 @@ public class Cliente {
 
     @NotNull
     @Column(name = "dni_cliente")
-    private int dniCliente;
+    private String dniCliente;
 
     @NotNull    
     private String nombre;
 
     @NotNull
     private String apellido;
+
+    private String cuit;
 
 
     @ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -45,12 +47,13 @@ public class Cliente {
     private List<ServiciosContratados> serviciosContratados = new ArrayList<>();
 
 
-    public Cliente(int id, @NotNull int dniCliente, @NotNull String nombre, @NotNull String apellido, Empresa empresa) {
+    public Cliente(int id, @NotNull String dniCliente, @NotNull String nombre, @NotNull String apellido, String cuit, Empresa empresa) {
         this.id = id;
         this.dniCliente = dniCliente;
         this.nombre = nombre;
         this.apellido = apellido;
         this.empresa = empresa;
+        this.cuit = cuit;
     }
 
     public Cliente() {
@@ -64,11 +67,11 @@ public class Cliente {
         this.id = id;
     }
 
-    public int getDniCliente() {
+    public String getDniCliente() {
         return dniCliente;
     }
 
-    public void setDniCliente(int dniCliente) {
+    public void setDniCliente(String dniCliente) {
         this.dniCliente = dniCliente;
     }
 
@@ -86,6 +89,14 @@ public class Cliente {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
+    }
+
+    public String getCuit(){
+        return cuit;
+    }
+
+    public void setCuit(String cuit){
+        this.cuit = cuit;
     }
 
     public Empresa getEmpresa() {

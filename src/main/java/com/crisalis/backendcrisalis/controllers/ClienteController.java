@@ -24,7 +24,7 @@ import com.crisalis.backendcrisalis.models.Empresa;
 import com.crisalis.backendcrisalis.services.IClienteServices;
 
 @RestController
-@CrossOrigin(origins = {"localhost:4200", "localhost"})
+@CrossOrigin(origins = {"http://localhost:4200", "localhost"})
 public class ClienteController {
     @Autowired
     private IClienteServices iClienteServices;
@@ -58,6 +58,17 @@ public class ClienteController {
         iClienteServices.saveCliente(cliente);
         return new ResponseEntity(new Mensaje("El cliente fué agregado"), HttpStatus.OK);
     } 
+
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<Cliente> getById(@PathVariable ("id")int id){
+        if(!iClienteServices.existById(id)){
+            return new ResponseEntity(new Mensaje("El id no existe"), HttpStatus.NOT_FOUND);
+        }
+        Cliente cliente = iClienteServices.getId(id).get();
+        return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
+        
+
+    }
 
     @DeleteMapping("/borrar/cliente/{id}")
     public String deleteCliente(@PathVariable int id){

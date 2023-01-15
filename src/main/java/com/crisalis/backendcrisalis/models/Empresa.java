@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Generated;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,9 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 
-//import antlr.collections.List;
 
 @Entity
 public class Empresa {
@@ -27,11 +25,11 @@ public class Empresa {
     private int id;
 
     @NotNull
-    private int cuit;
+    private String cuit;
 
     @NotNull
     @Column(name = "razon_social")
-    private String razonSocial;
+    private String razonSocial; 
 
     @NotNull
     @Column(name = "fecha_inicio_actividades")
@@ -45,7 +43,7 @@ public class Empresa {
     public Empresa() {
     }
 
-    public Empresa(int id, @NotNull int cuit, @NotNull String razonSocial, @NotNull LocalDate fechaInicioActividades,
+    public Empresa(int id, @NotNull @NotNull String cuit, @NotNull String razonSocial, @NotNull LocalDate fechaInicioActividades,
             List<Cliente> clientes) {
         this.id = id;
         this.cuit = cuit;
@@ -62,11 +60,11 @@ public class Empresa {
         this.id = id;
     }
 
-    public int getCuit() {
+    public String getCuit() {
         return cuit;
     }
 
-    public void setCuit(int cuit) {
+    public void setCuit(String cuit) {
         this.cuit = cuit;
     }
 
