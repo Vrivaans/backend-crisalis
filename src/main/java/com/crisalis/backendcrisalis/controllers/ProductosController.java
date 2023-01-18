@@ -3,6 +3,8 @@ package com.crisalis.backendcrisalis.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +17,7 @@ import com.crisalis.backendcrisalis.models.Productos;
 import com.crisalis.backendcrisalis.services.IProductosServices;
 
 @RestController
-@CrossOrigin(origins = {"localhost:4200", "localhost"})
+@CrossOrigin(origins = {"http://localhost:4200", "localhost"})
 public class ProductosController {
     @Autowired
     private IProductosServices iProductosServices;
@@ -26,15 +28,22 @@ public class ProductosController {
         return "Producto agregado exitosamente";
     }
 
-    @DeleteMapping("/borrar/producto/{id}")
+    /*@DeleteMapping("/borrar/producto/{id}")
     public String borrarProducto(int id){
         iProductosServices.deleteProducto(id);
             return "Se borró el producto"; 
+    }*/
+    @DeleteMapping("/borrar/producto/{id}")
+    public String borrarProducto(@PathVariable int id){
+        iProductosServices.deleteProducto(id);
+        return "El producto fué eliminado";
     }
 
+    
     @GetMapping("/traer/productos")
-    public List<Productos>getProductos(@PathVariable int id){
-        return iProductosServices.getProductos();
+    public ResponseEntity<List<Productos>>getProductos(){
+        List<Productos> lista = iProductosServices.getProductos();
+        return new ResponseEntity<>(lista, HttpStatus.OK);
     }
 
     

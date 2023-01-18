@@ -25,7 +25,7 @@ public class PedidosClientes {
 
     @Column(name = "fecha_pedido")
     @NotNull
-    private LocalDate fechaPedido;
+    private String fechaPedido;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_cliente")

@@ -33,7 +33,7 @@ public class Empresa {
 
     @NotNull
     @Column(name = "fecha_inicio_actividades")
-    private LocalDate fechaInicioActividades;
+    private String fechaInicioActividades;
 
     @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Cliente> clientes = new ArrayList<>();
@@ -43,13 +43,12 @@ public class Empresa {
     public Empresa() {
     }
 
-    public Empresa(int id, @NotNull @NotNull String cuit, @NotNull String razonSocial, @NotNull LocalDate fechaInicioActividades,
-            List<Cliente> clientes) {
+    public Empresa(int id, @NotNull @NotNull String cuit, @NotNull String razonSocial, @NotNull String fechaInicioActividades) {
         this.id = id;
         this.cuit = cuit;
         this.razonSocial = razonSocial;
         this.fechaInicioActividades = fechaInicioActividades;
-        this.clientes = clientes;
+        
     }
 
     public int getId() {
@@ -76,11 +75,11 @@ public class Empresa {
         this.razonSocial = razonSocial;
     }
 
-    public LocalDate getFechaInicioActividades() {
+    public String getFechaInicioActividades() {
         return fechaInicioActividades;
     }
 
-    public void setFechaInicioActividades(LocalDate fechaInicioActividades) {
+    public void setFechaInicioActividades(String fechaInicioActividades) {
         this.fechaInicioActividades = fechaInicioActividades;
     }
 

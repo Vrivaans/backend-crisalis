@@ -19,14 +19,15 @@ import com.crisalis.backendcrisalis.services.IClienteServices;
 import com.crisalis.backendcrisalis.services.IServiciosServices;
 
 @RestController
-@CrossOrigin(origins = {"localhost:4200", "localhost"})
+@CrossOrigin(origins = {"http://localhost:4200", "localhost"})
 public class ServiciosController {
     @Autowired
     IServiciosServices iServiciosServices;
 
     @GetMapping("/traer/servicios")
-    public List<Servicios> getServicios(){
-        return iServiciosServices.getServicios();
+    public ResponseEntity<List<Servicios>>getServicios(){
+        List<Servicios> lista = iServiciosServices.getServicios();
+        return new ResponseEntity<>(lista, HttpStatus.OK);
     }
 
     @PostMapping("/crear/servicio")

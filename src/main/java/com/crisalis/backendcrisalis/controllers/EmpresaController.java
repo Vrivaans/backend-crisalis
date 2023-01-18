@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = {"localhost:4200", "localhost"})
+@CrossOrigin(origins = {"http://localhost:4200", "localhost"})
 public class EmpresaController {
 
     @Autowired
@@ -32,7 +32,7 @@ public class EmpresaController {
         return new ResponseEntity<>(listaEmpresas, HttpStatus.OK);
     }
 
-    @DeleteMapping("/borrar/empresa")
+    @DeleteMapping("/borrar/empresa/{id}")
     public ResponseEntity<?> borrarEmpresa(@PathVariable("id") int id){
         if(!IEmpresaServices.existById(id)){
             return new ResponseEntity(new Mensaje ("No existe el id seleccionado"), HttpStatus.BAD_REQUEST);
@@ -48,7 +48,7 @@ public class EmpresaController {
         return new ResponseEntity(new Mensaje("Se agregó la empresa"), HttpStatus.OK);
     }
 
-    @PutMapping("/actualizar/empresa/{id}")
+    @PutMapping("/actualizar/empresa/{id}") 
     public ResponseEntity<?> actualizarEmpresa(@PathVariable("id") int id, @RequestBody Empresa empresa){
         if(!IEmpresaServices.existById(id)){
             return new ResponseEntity(new Mensaje ("No existe el id"), HttpStatus.NOT_FOUND);
