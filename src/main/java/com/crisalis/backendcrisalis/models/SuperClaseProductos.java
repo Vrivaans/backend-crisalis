@@ -17,11 +17,17 @@ public class SuperClaseProductos {
     private float precioBase;
 
     private String nombre;
+    private boolean aplicaIva;
+    private boolean aplicaIBrutos;
+    private boolean aplicaGanancias;
 
-    public SuperClaseProductos(int id, float precioBase, String nombre) {
+    public SuperClaseProductos(int id, float precioBase, String nombre, boolean aplicaIva, boolean aplicaIBrutos, boolean aplicaGanancias) {
         this.id = id;
         this.precioBase = precioBase;
         this.nombre = nombre;
+        this.aplicaIva = aplicaIva;
+        this.aplicaIBrutos = aplicaIBrutos;
+        this.aplicaGanancias = aplicaGanancias;
     }
 
     public SuperClaseProductos (){}

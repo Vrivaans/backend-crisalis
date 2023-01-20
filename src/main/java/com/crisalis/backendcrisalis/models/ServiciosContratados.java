@@ -10,9 +10,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 
 @Entity
 @Table(name = "servicios_contratados")
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class ServiciosContratados {
     
     @Id
@@ -24,9 +35,12 @@ public class ServiciosContratados {
     private Cliente cliente;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_empresa", referencedColumnName = "id")
+    private Empresa empresa;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_servicio")
     private Servicios servicio;
 
-    //Falta poner la relación con los servicios y falta poner en la de clientes la relación
-
+    
 }

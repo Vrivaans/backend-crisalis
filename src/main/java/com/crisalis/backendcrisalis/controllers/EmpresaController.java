@@ -24,42 +24,42 @@ import org.springframework.web.bind.annotation.RestController;
 public class EmpresaController {
 
     @Autowired
-    private IEmpresaServices IEmpresaServices;
+    private IEmpresaServices iEmpresaServices;
     
     @GetMapping("/traer/empresas")
     public ResponseEntity<List<Empresa>> getEmpresas(){
-        List<Empresa> listaEmpresas = IEmpresaServices.getEmpresas();
+        List<Empresa> listaEmpresas = iEmpresaServices.getEmpresas();
         return new ResponseEntity<>(listaEmpresas, HttpStatus.OK);
     }
 
     @DeleteMapping("/borrar/empresa/{id}")
     public ResponseEntity<?> borrarEmpresa(@PathVariable("id") int id){
-        if(!IEmpresaServices.existById(id)){
+        if(!iEmpresaServices.existById(id)){
             return new ResponseEntity(new Mensaje ("No existe el id seleccionado"), HttpStatus.BAD_REQUEST);
         }
-        IEmpresaServices.deleteEmpresa(id);
+        iEmpresaServices.deleteEmpresa(id);
         return new ResponseEntity(new Mensaje("La empresa fué eliminada"), HttpStatus.OK);
         
     }
 
     @PostMapping("/crear/empresa")
     public ResponseEntity<?> crearEmpresa(@RequestBody Empresa empresa){
-        IEmpresaServices.saveEmpresa(empresa);
+        iEmpresaServices.saveEmpresa(empresa);
         return new ResponseEntity(new Mensaje("Se agregó la empresa"), HttpStatus.OK);
     }
 
     @PutMapping("/actualizar/empresa/{id}") 
     public ResponseEntity<?> actualizarEmpresa(@PathVariable("id") int id, @RequestBody Empresa empresa){
-        if(!IEmpresaServices.existById(id)){
+        if(!iEmpresaServices.existById(id)){
             return new ResponseEntity(new Mensaje ("No existe el id"), HttpStatus.NOT_FOUND);
         }
 
-        Empresa empresa1 = IEmpresaServices.getId(id).get();
+        Empresa empresa1 = iEmpresaServices.getId(id).get();
         empresa1.setCuit(empresa.getCuit());
         empresa1.setFechaInicioActividades(empresa.getFechaInicioActividades());
         empresa1.setRazonSocial(empresa.getRazonSocial());
 
-        IEmpresaServices.saveEmpresa(empresa1);
+        iEmpresaServices.saveEmpresa(empresa1);
 
 
         return new ResponseEntity(new Mensaje("Se actualizó correctamente"), HttpStatus.OK);

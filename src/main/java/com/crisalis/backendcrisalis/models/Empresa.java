@@ -3,8 +3,9 @@ package com.crisalis.backendcrisalis.models;
 //import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,16 +14,30 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 
 @Entity
-public class Empresa {
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+public class Empresa extends Persona {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
 
     @NotNull
     private String cuit;
@@ -35,60 +50,10 @@ public class Empresa {
     @Column(name = "fecha_inicio_actividades")
     private String fechaInicioActividades;
 
-    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Cliente> clientes = new ArrayList<>();
+    @OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<PedidosClientes> pedidos = new HashSet<>();
 
-    
-
-    public Empresa() {
-    }
-
-    public Empresa(int id, @NotNull @NotNull String cuit, @NotNull String razonSocial, @NotNull String fechaInicioActividades) {
-        this.id = id;
-        this.cuit = cuit;
-        this.razonSocial = razonSocial;
-        this.fechaInicioActividades = fechaInicioActividades;
-        
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getCuit() {
-        return cuit;
-    }
-
-    public void setCuit(String cuit) {
-        this.cuit = cuit;
-    }
-
-    public String getRazonSocial() {
-        return razonSocial;
-    }
-
-    public void setRazonSocial(String razonSocial) {
-        this.razonSocial = razonSocial;
-    }
-
-    public String getFechaInicioActividades() {
-        return fechaInicioActividades;
-    }
-
-    public void setFechaInicioActividades(String fechaInicioActividades) {
-        this.fechaInicioActividades = fechaInicioActividades;
-    }
-
-    public List<Cliente> getClientes() {
-        return clientes;
-    }
-
-    public void setClientes(List<Cliente> clientes) {
-        this.clientes = clientes;
-    }
+    @OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<ServiciosContratados> serviciosContratados = new HashSet<>();
     
 }

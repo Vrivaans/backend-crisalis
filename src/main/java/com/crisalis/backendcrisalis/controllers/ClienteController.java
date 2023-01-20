@@ -75,12 +75,17 @@ public class ClienteController {
         iClienteServices.deleteCliente(id);
         return "El cliente fué eliminado";
     }
-
+    
     @GetMapping("/traer/clientes")
     public ResponseEntity<List<Cliente>>getClientes(){
         List<Cliente> lista = iClienteServices.getClientes();
         return new ResponseEntity<>(lista, HttpStatus.OK);
     }
+
+    //@GetMapping("/traer/cliente")
+    //public List<Cliente> getClientes(){
+    //    return iClienteServices.getClientes();
+    //}
 
     @PutMapping("/actualizar/cliente/{id}")
     public ResponseEntity<?> updateCliente(@PathVariable("id")int id, @RequestBody Cliente cliente){

@@ -1,11 +1,10 @@
 package com.crisalis.backendcrisalis.dto;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.crisalis.backendcrisalis.models.DetallesPedidos;
+import com.crisalis.backendcrisalis.models.ServiciosContratados;
 import com.crisalis.backendcrisalis.models.SuperClaseProductos;
 
 import lombok.AllArgsConstructor;
@@ -14,16 +13,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-
-
-
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class DtoProductos extends SuperClaseProductos {
+public class DtoServicio extends SuperClaseProductos {
+    
 
-    private Set<DetallesPedidos>detallesPedidos = new HashSet<>();
 
+    private float soportePrecio;
+    private boolean esEspecial;
+
+    private List<ServiciosContratados> serviciosContratados;
+    private List<DetallesPedidos>detallesPedidos = new ArrayList<>();
 }
