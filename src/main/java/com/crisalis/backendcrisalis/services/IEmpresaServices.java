@@ -3,6 +3,7 @@ package com.crisalis.backendcrisalis.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.crisalis.backendcrisalis.dto.DtoEmpresa;
 import com.crisalis.backendcrisalis.models.Empresa;
 
 public interface IEmpresaServices {
@@ -17,5 +18,5 @@ public interface IEmpresaServices {
 
     public Optional<Empresa>getId(int id);
 
-    public List<Empresa>getEmpresas();
+    public List<DtoEmpresa> getEmpresas();
 }

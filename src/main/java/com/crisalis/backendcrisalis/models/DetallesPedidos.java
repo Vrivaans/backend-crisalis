@@ -8,20 +8,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
 @Entity
 @Table(name = "detalles_pedidos")
-@Getter
-@Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
@@ -48,6 +42,62 @@ public class DetallesPedidos {
     private int garantia;
     
     private float precioDeVenta;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public PedidosClientes getPedidosClientes() {
+        return pedidosClientes;
+    }
+
+    public void setPedidosClientes(PedidosClientes pedidosClientes) {
+        this.pedidosClientes = pedidosClientes;
+    }
+
+    public Productos getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Productos producto) {
+        this.producto = producto;
+    }
+
+    public Servicios getServicio() {
+        return servicio;
+    }
+
+    public void setServicio(Servicios servicio) {
+        this.servicio = servicio;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public int getGarantia() {
+        return garantia;
+    }
+
+    public void setGarantia(int garantia) {
+        this.garantia = garantia;
+    }
+
+    public float getPrecioDeVenta() {
+        return precioDeVenta;
+    }
+
+    public void setPrecioDeVenta(float precioDeVenta) {
+        this.precioDeVenta = precioDeVenta;
+    }
     
     
     

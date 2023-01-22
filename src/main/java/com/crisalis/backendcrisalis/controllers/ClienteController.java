@@ -1,10 +1,9 @@
+
 package com.crisalis.backendcrisalis.controllers;
 
-import com.crisalis.backendcrisalis.models.Empresa;
 import com.crisalis.backendcrisalis.security.Controller.Mensaje;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.crisalis.backendcrisalis.dto.DtoCliente;
 import com.crisalis.backendcrisalis.models.Cliente;
-import com.crisalis.backendcrisalis.models.Empresa;
-//import com.crisalis.backendcrisalis.repository.ClienteRepository;
+
 import com.crisalis.backendcrisalis.services.IClienteServices;
 
 @RestController
@@ -52,6 +50,10 @@ public class ClienteController {
         return new ResponseEntity(new Mensaje("El cliente fué agregado"), HttpStatus.OK);
     } */
 
+
+   
+
+
     @PostMapping("/crear/cliente")
     public ResponseEntity<?> crearCliente(@RequestBody Cliente cliente){
         
@@ -77,8 +79,8 @@ public class ClienteController {
     }
     
     @GetMapping("/traer/clientes")
-    public ResponseEntity<List<Cliente>>getClientes(){
-        List<Cliente> lista = iClienteServices.getClientes();
+    public ResponseEntity<List<DtoCliente>>getClientes(){
+        List<DtoCliente> lista = iClienteServices.getClientes();
         return new ResponseEntity<>(lista, HttpStatus.OK);
     }
 

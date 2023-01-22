@@ -3,6 +3,7 @@ package com.crisalis.backendcrisalis.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.crisalis.backendcrisalis.dto.DtoCliente;
 import com.crisalis.backendcrisalis.models.Cliente;
 
 public interface IClienteServices {
@@ -16,7 +17,7 @@ public interface IClienteServices {
 
     public Optional<Cliente>getId(int id);
 
-    public List<Cliente>getClientes();
+    public List<DtoCliente> getClientes();
 
     public boolean existsByDniCliente(String dniCliente);
 

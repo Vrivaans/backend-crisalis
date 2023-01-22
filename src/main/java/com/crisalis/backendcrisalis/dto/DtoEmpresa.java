@@ -1,10 +1,11 @@
 package com.crisalis.backendcrisalis.dto;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
+import com.crisalis.backendcrisalis.models.Empresa;
 import com.crisalis.backendcrisalis.models.PedidosClientes;
 import com.crisalis.backendcrisalis.models.Persona;
 import com.crisalis.backendcrisalis.models.ServiciosContratados;
@@ -16,11 +17,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class DtoEmpresa extends Persona {
 
     private String cuit;
@@ -29,8 +26,60 @@ public class DtoEmpresa extends Persona {
 
     private String fechaInicioActividades;
 
-    private Set<PedidosClientes> pedidos = new HashSet<>();
+    private List<PedidosClientes> pedidos = new ArrayList<>();
 
-    private Set<ServiciosContratados> serviciosContratados = new HashSet<>();
+    //private List<ServiciosContratados> serviciosContratados = new ArrayList<>();
+
+    public DtoEmpresa(){
+
+    }
+
+    public DtoEmpresa(Empresa empresa) {
+        super(empresa.getId(), empresa.getDniCliente(), empresa.getNombre(), empresa.getApellido());
+        this.cuit = empresa.getCuit();
+        this.razonSocial = empresa.getRazonSocial();
+        this.fechaInicioActividades = empresa.getFechaInicioActividades();
+      
+    }
+
+
+
+
+
+
+
+    public List<PedidosClientes> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<PedidosClientes> pedidos) {
+        this.pedidos = pedidos;
+    }
+
     
+    public String getCuit() {
+        return cuit;
+    }
+
+    public void setCuit(String cuit) {
+        this.cuit = cuit;
+    }
+
+    public String getRazonSocial() {
+        return razonSocial;
+    }
+
+    public void setRazonSocial(String razonSocial) {
+        this.razonSocial = razonSocial;
+    }
+
+    public String getFechaInicioActividades() {
+        return fechaInicioActividades;
+    }
+
+    public void setFechaInicioActividades(String fechaInicioActividades) {
+        this.fechaInicioActividades = fechaInicioActividades;
+    }
+
+
 }

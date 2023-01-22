@@ -3,6 +3,7 @@ package com.crisalis.backendcrisalis.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.crisalis.backendcrisalis.dto.DtoPedidos;
 import com.crisalis.backendcrisalis.models.PedidosClientes;
 
 
@@ -17,5 +18,5 @@ public interface IPedidosServices {
 
     public Optional<PedidosClientes>getId(int id);
 
-    public List<PedidosClientes>getPedidos();
+    public List<DtoPedidos>getPedidos();
 }

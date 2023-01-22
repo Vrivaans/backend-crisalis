@@ -1,5 +1,6 @@
 package com.crisalis.backendcrisalis.controllers;
 
+import com.crisalis.backendcrisalis.dto.DtoEmpresa;
 import com.crisalis.backendcrisalis.models.Empresa;
 import com.crisalis.backendcrisalis.security.Controller.Mensaje;
 import com.crisalis.backendcrisalis.services.IEmpresaServices;
@@ -27,8 +28,8 @@ public class EmpresaController {
     private IEmpresaServices iEmpresaServices;
     
     @GetMapping("/traer/empresas")
-    public ResponseEntity<List<Empresa>> getEmpresas(){
-        List<Empresa> listaEmpresas = iEmpresaServices.getEmpresas();
+    public ResponseEntity<List<DtoEmpresa>> getEmpresas(){
+        List<DtoEmpresa> listaEmpresas = iEmpresaServices.getEmpresas();
         return new ResponseEntity<>(listaEmpresas, HttpStatus.OK);
     }
 

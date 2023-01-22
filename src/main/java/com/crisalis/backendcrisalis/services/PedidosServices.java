@@ -1,5 +1,6 @@
 package com.crisalis.backendcrisalis.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.crisalis.backendcrisalis.dto.DtoPedidos;
 import com.crisalis.backendcrisalis.models.PedidosClientes;
 import com.crisalis.backendcrisalis.repository.PedidosRepository;
 
@@ -46,9 +48,12 @@ public class PedidosServices implements IPedidosServices {
     }
 
     @Override
-    public List<PedidosClientes> getPedidos() {
+    public List<DtoPedidos> getPedidos() {
         List<PedidosClientes> listaPedidos = pedidosRepository.findAll();
-        return listaPedidos;
+        List<DtoPedidos> listaPedidosDto = new ArrayList<>();
+        listaPedidos.forEach(pedido -> listaPedidosDto.add(new DtoPedidos(pedido)));
+
+        return listaPedidosDto;
     }
     
 }

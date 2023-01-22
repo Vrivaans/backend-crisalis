@@ -1,5 +1,8 @@
+
+
 package com.crisalis.backendcrisalis.controllers;
 
+import com.crisalis.backendcrisalis.dto.DtoPedidos;
 import com.crisalis.backendcrisalis.models.PedidosClientes;
 import com.crisalis.backendcrisalis.security.Controller.Mensaje;
 
@@ -33,8 +36,8 @@ public class PedidoController {
     } 
 
     @GetMapping("/traer/pedidos")
-    public ResponseEntity<List<PedidosClientes>>getPedidos(){
-        List<PedidosClientes> listaPedidos = iPedidosServices.getPedidos();
+    public ResponseEntity<List<DtoPedidos>>getPedidos(){
+        List<DtoPedidos> listaPedidos = iPedidosServices.getPedidos();
         return new ResponseEntity<>(listaPedidos, HttpStatus.OK);
     }
 

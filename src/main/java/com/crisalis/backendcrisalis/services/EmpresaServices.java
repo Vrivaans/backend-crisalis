@@ -1,5 +1,6 @@
 package com.crisalis.backendcrisalis.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.crisalis.backendcrisalis.dto.DtoEmpresa;
 import com.crisalis.backendcrisalis.models.Empresa;
 import com.crisalis.backendcrisalis.repository.EmpresaRepository;
 
@@ -46,9 +48,13 @@ public class EmpresaServices implements IEmpresaServices{
     }
 
     @Override
-    public List<Empresa> getEmpresas() {
+    public List<DtoEmpresa> getEmpresas() {
         List<Empresa> listaEmpresas = empresaRepository.findAll();
-        return listaEmpresas;
+        List<DtoEmpresa> listaEmpresasDto = new ArrayList<>();
+        listaEmpresas.forEach(empresa -> listaEmpresasDto.add(new DtoEmpresa(empresa)));
+
+        return listaEmpresasDto;
     }
     
+
 }

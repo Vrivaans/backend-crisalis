@@ -12,11 +12,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
 public class Impuestos {
     
     @Id
@@ -26,4 +21,38 @@ public class Impuestos {
     private String nombreImpuesto;
 
     private double porcentaje;
+    
+    public Impuestos (){
+        
+    }
+
+    public Impuestos(int id, String nombreImpuesto, double porcentaje) {
+        this.id = id;
+        this.nombreImpuesto = nombreImpuesto;
+        this.porcentaje = porcentaje;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombreImpuesto() {
+        return nombreImpuesto;
+    }
+
+    public void setNombreImpuesto(String nombreImpuesto) {
+        this.nombreImpuesto = nombreImpuesto;
+    }
+
+    public double getPorcentaje() {
+        return porcentaje;
+    }
+
+    public void setPorcentaje(double porcentaje) {
+        this.porcentaje = porcentaje;
+    }
 }
