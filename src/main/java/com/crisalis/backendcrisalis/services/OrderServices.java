@@ -3,11 +3,16 @@ package com.crisalis.backendcrisalis.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.crisalis.backendcrisalis.models.OrderE;
 import com.crisalis.backendcrisalis.repository.OrderRepository;
 
+@Service
+@Transactional
 public class OrderServices implements IOrderServices {
 
     @Autowired
@@ -41,7 +46,7 @@ public class OrderServices implements IOrderServices {
     }
 
     @Override
-    public List<OrderE> getOrder() {
+    public List<OrderE> getOrders() {
         List<OrderE> listaOrders = orderRepository.findAll();
         return listaOrders;
     }

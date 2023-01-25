@@ -36,8 +36,8 @@ public class Cliente extends Persona {
     */
     
     
-    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<ServiciosContratados> serviciosContratados = new ArrayList<>();
+    // @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    // private List<ServiciosContratados> serviciosContratados = new ArrayList<>();
 
 
     public Cliente(){
@@ -46,12 +46,12 @@ public class Cliente extends Persona {
     public Cliente(int id, String dniCliente, String nombre, String apellido){
         super(id, dniCliente, nombre, apellido);
     }
-    public List<ServiciosContratados> getServiciosContratados() {
-        return serviciosContratados;
-    }
-    public void setServiciosContratados(List<ServiciosContratados> serviciosContratados) {
-        this.serviciosContratados = serviciosContratados;
-    }
+    // public List<ServiciosContratados> getServiciosContratados() {
+    //     return serviciosContratados;
+    // }
+    // public void setServiciosContratados(List<ServiciosContratados> serviciosContratados) {
+    //     this.serviciosContratados = serviciosContratados;
+    // }
 
     /*public Cliente(int id,  String dniCliente,  String nombre,  String apellido{
             //List<PedidosClientes> pedidos, List<ServiciosContratados> serviciosContratados) {

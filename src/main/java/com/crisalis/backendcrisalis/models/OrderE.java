@@ -38,6 +38,10 @@ public class OrderE {
     @JoinColumn(name = "id_cliente")    
     private Cliente cliente;
 
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "id_empresa")    
+    private Empresa empresa;
+
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<OrderDetail> orderDetails = new ArrayList<>();
@@ -103,6 +107,26 @@ public class OrderE {
 
     public void setOrderDetails(List<OrderDetail> orderDetails) {
         this.orderDetails = orderDetails;
+    }
+
+
+    public String getCodigoIdentificador() {
+        return codigoIdentificador;
+    }
+
+
+    public void setCodigoIdentificador(String codigoIdentificador) {
+        this.codigoIdentificador = codigoIdentificador;
+    }
+
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
     
 }

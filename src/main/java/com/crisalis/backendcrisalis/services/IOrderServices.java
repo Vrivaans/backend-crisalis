@@ -17,7 +17,7 @@ public interface IOrderServices {
 
     public Optional<OrderE>getId(int id);
 
-    public List<OrderE>getOrder();
+    public List<OrderE>getOrders();
 
     
 }
