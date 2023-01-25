@@ -34,11 +34,11 @@ public class OrderE {
 
     private boolean activo;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = true)
     @JoinColumn(name = "id_cliente")    
     private Cliente cliente;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = true)
     @JoinColumn(name = "id_empresa")    
     private Empresa empresa;
 
@@ -127,6 +127,16 @@ public class OrderE {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
     
 }

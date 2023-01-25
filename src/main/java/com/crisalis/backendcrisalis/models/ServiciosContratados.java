@@ -38,6 +38,8 @@ public class ServiciosContratados {
     @JoinColumn(name = "id_servicio")
     private Servicios servicio;
 
+    private boolean activo;
+
     public int getId() {
         return id;
     }
@@ -68,6 +70,14 @@ public class ServiciosContratados {
 
     public void setServicio(Servicios servicio) {
         this.servicio = servicio;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
     
