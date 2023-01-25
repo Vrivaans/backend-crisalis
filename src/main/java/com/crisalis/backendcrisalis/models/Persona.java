@@ -14,20 +14,20 @@ public class Persona {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotNull
+  
     @Column(name = "dni_cliente")
     private String dniCliente;
 
-    @NotNull    
+      
     private String nombre;
 
-    @NotNull
+    
     private String apellido;
 
     public Persona() {
     }
 
-    public Persona(int id, @NotNull String dniCliente, @NotNull String nombre, @NotNull String apellido) {
+    public Persona(int id, String dniCliente,  String nombre,  String apellido) {
         this.id = id;
         this.dniCliente = dniCliente;
         this.nombre = nombre;

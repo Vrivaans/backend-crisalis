@@ -13,28 +13,22 @@ import lombok.ToString;
 
 @Entity
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor
 public class Productos extends SuperClaseProductos {
     
 
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<DetallesPedidos>detallesPedidos = new ArrayList<>();
-
+    /*
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<OrderDetail>orderDetails = new ArrayList<>(); 
+     */
+    public Productos(){
+        
+    }
     public Productos(int id, float precioBase, String nombre, boolean aplicaIva, boolean aplicaIBrutos,
-            boolean aplicaGanancias, List<DetallesPedidos> detallesPedidos) {
+            boolean aplicaGanancias) {
         super(id, precioBase, nombre, aplicaIva, aplicaIBrutos, aplicaGanancias);
-        this.detallesPedidos = detallesPedidos;
+        
     }
 
-    public List<DetallesPedidos> getDetallesPedidos() {
-        return detallesPedidos;
-    }
-
-    public void setDetallesPedidos(List<DetallesPedidos> detallesPedidos) {
-        this.detallesPedidos = detallesPedidos;
-    }
 
 
 

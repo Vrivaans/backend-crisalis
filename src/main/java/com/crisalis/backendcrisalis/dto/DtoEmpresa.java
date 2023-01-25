@@ -6,7 +6,6 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 
 import com.crisalis.backendcrisalis.models.Empresa;
-import com.crisalis.backendcrisalis.models.PedidosClientes;
 import com.crisalis.backendcrisalis.models.Persona;
 import com.crisalis.backendcrisalis.models.ServiciosContratados;
 
@@ -17,8 +16,10 @@ import lombok.Setter;
 import lombok.ToString;
 
 
-
+@ToString
 public class DtoEmpresa extends Persona {
+
+   
 
     private String cuit;
 
@@ -26,12 +27,17 @@ public class DtoEmpresa extends Persona {
 
     private String fechaInicioActividades;
 
-    private List<PedidosClientes> pedidos = new ArrayList<>();
 
     //private List<ServiciosContratados> serviciosContratados = new ArrayList<>();
 
     public DtoEmpresa(){
 
+    }
+
+    public DtoEmpresa(String cuit, String razonSocial, String fechaInicioActividades) {
+        this.cuit = cuit;
+        this.razonSocial = razonSocial;
+        this.fechaInicioActividades = fechaInicioActividades;
     }
 
     public DtoEmpresa(Empresa empresa) {
@@ -47,14 +53,6 @@ public class DtoEmpresa extends Persona {
 
 
 
-
-    public List<PedidosClientes> getPedidos() {
-        return pedidos;
-    }
-
-    public void setPedidos(List<PedidosClientes> pedidos) {
-        this.pedidos = pedidos;
-    }
 
     
     public String getCuit() {

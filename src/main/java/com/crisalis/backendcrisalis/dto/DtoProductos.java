@@ -10,11 +10,14 @@ import lombok.ToString;
 
 
 
-@Getter
-@Setter
 @ToString
-@NoArgsConstructor
-public class DtoProductos extends SuperClaseProductos {
+public class DtoProductos extends SuperClaseProductos {public DtoProductos(int id, float precioBase, String nombre, boolean aplicaIva, boolean aplicaIBrutos,
+            boolean aplicaGanancias) {
+        super(id, precioBase, nombre, aplicaIva, aplicaIBrutos, aplicaGanancias);
+    }
+    public DtoProductos(){
+        
+    }
 
    
 

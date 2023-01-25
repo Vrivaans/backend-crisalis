@@ -3,9 +3,9 @@ package com.crisalis.backendcrisalis.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.crisalis.backendcrisalis.models.DetallesPedidos;
+import com.crisalis.backendcrisalis.models.OrderDetail;
 
 @Repository
-public interface DetallesPedidosRepository extends JpaRepository<DetallesPedidos, Integer>{
+public interface OrderDetailRepository extends JpaRepository <OrderDetail, Integer> {
     
 }
