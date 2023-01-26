@@ -18,21 +18,21 @@ public class OrderDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int id; 
 
     private float precioVenta;
 
     private int cantidad;
 
-    private float soporte_precio;
+    private float soportePrecio;
 
     private int garantia;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_producto")
     private Productos productos;    
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_servicio")
     private Servicios servicios;
 
@@ -40,10 +40,11 @@ public class OrderDetail {
 
     }
 
-    public OrderDetail(int id, float precioVenta, int cantidad, Productos productos, Servicios servicios) {
+    public OrderDetail(int id, float precioVenta, int cantidad,float soportePrecio, Productos productos, Servicios servicios) {
         this.id = id;
         this.precioVenta = precioVenta;
         this.cantidad = cantidad;
+        this.soportePrecio = soportePrecio;
         this.productos = productos;
         this.servicios = servicios;
     }
@@ -88,12 +89,12 @@ public class OrderDetail {
         this.servicios = servicios;
     }
 
-    public float getSoporte_precio() {
-        return soporte_precio;
+    public float getSoportePrecio() {
+        return soportePrecio;
     }
 
-    public void setSoporte_precio(float soporte_precio) {
-        this.soporte_precio = soporte_precio;
+    public void setSoportePrecio(float soportePrecio) {
+        this.soportePrecio = soportePrecio;
     }
 
     public int getGarantia() {

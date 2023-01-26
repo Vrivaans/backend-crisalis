@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.annotation.Generated;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -30,7 +31,8 @@ public class OrderE {
 
     private int totalPedido;
 
-    private String codigoIdentificador;
+    // @Column(unique = true, nullable = false)
+    // private String codigoIdentificador;
 
     private boolean activo;
 
@@ -43,7 +45,7 @@ public class OrderE {
     private Empresa empresa;
 
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     List<OrderDetail> orderDetails = new ArrayList<>();
 
     public OrderE(){
@@ -110,14 +112,14 @@ public class OrderE {
     }
 
 
-    public String getCodigoIdentificador() {
-        return codigoIdentificador;
-    }
+    // public String getCodigoIdentificador() {
+    //     return codigoIdentificador;
+    // }
 
 
-    public void setCodigoIdentificador(String codigoIdentificador) {
-        this.codigoIdentificador = codigoIdentificador;
-    }
+    // public void setCodigoIdentificador(String codigoIdentificador) {
+    //     this.codigoIdentificador = codigoIdentificador;
+    // }
 
 
     public boolean isActivo() {
