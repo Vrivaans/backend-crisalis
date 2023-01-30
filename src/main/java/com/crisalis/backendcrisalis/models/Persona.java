@@ -15,7 +15,7 @@ public class Persona {
     private int id;
 
   
-    @Column(name = "dni_cliente")
+    @Column(name = "dni_cliente", unique = true)
     private String dniCliente;
 
       

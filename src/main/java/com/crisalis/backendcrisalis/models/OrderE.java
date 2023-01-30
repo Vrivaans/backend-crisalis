@@ -44,7 +44,6 @@ public class OrderE {
     @JoinColumn(name = "id_empresa")    
     private Empresa empresa;
 
-
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     List<OrderDetail> orderDetails = new ArrayList<>();
 

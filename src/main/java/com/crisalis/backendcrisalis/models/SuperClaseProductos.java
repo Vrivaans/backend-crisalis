@@ -16,6 +16,7 @@ public class SuperClaseProductos {
     @Column(name = "precio_base")
     private float precioBase;
 
+    @Column(unique = true)
     private String nombre;
     private boolean aplicaIva;
     private boolean aplicaIBrutos;

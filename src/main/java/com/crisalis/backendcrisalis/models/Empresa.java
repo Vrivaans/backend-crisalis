@@ -21,7 +21,7 @@ import lombok.ToString;
 public class Empresa extends Persona {
     
 
-    
+    @Column(unique = true)
     private String cuit;
 
     

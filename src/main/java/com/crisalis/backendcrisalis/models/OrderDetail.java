@@ -18,7 +18,7 @@ public class OrderDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id; 
+    private int id;
 
     private float precioVenta;
 
@@ -30,7 +30,7 @@ public class OrderDetail {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_producto")
-    private Productos productos;    
+    private Productos productos;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_servicio")
