@@ -28,11 +28,11 @@ public class OrderDetail {
 
     private int garantia;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, optional = true)
     @JoinColumn(name = "id_producto")
     private Productos productos;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, optional = true)
     @JoinColumn(name = "id_servicio")
     private Servicios servicios;
 

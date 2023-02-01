@@ -63,6 +63,12 @@ public class ClienteServices implements IClienteServices {
         return clienteRepository.existsByDniCliente(dniCliente);
     }
 
+    @Override
+    public Cliente findByDniCliente(String dniCliente) {
+        Cliente cliente = clienteRepository.findByDniCliente(dniCliente).orElse(null);
+        return cliente;
+    }
+
     
     
 }

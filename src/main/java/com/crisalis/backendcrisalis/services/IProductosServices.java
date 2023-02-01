@@ -20,4 +20,6 @@ public interface IProductosServices {
 
     public List<Productos>getProductos();
 
+    public Productos getProductoByNombre(String nombre); 
+
 }

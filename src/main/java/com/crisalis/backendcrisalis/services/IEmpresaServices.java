@@ -14,6 +14,8 @@ public interface IEmpresaServices {
 
     public Empresa findEmpresa(int id);
 
+    public Empresa findEmpresaByCuit(String cuit);
+
     public boolean existById(int id);
 
     public Optional<Empresa>getId(int id);

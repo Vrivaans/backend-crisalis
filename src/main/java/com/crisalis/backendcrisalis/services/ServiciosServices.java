@@ -49,5 +49,11 @@ public class ServiciosServices implements IServiciosServices {
         List<Servicios> listaServicios = serviciosRepository.findAll();
         return listaServicios;
     }
+
+    @Override
+    public Servicios getServicioByNombre(String nombre) {
+        Servicios servicio = serviciosRepository.findServicioByNombre(nombre).orElse(null);
+        return servicio;
+    }
     
 }

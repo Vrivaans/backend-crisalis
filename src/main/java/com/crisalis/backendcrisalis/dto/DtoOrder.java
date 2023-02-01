@@ -13,23 +13,88 @@ import lombok.ToString;
 public class DtoOrder {
     
 
-    private int id; 
+    //private int id; 
 
     private String fechaPedido;
 
     private int totalPedido;
 
-    private String codigoIdentificador;
-
     private boolean activo;
     
-    private Cliente cliente;
+    private String dniCliente;
 
-    private Empresa empresa;
+    private String cuit;
 
+    List<DtoOrderDetail> orderDetails = new ArrayList<>();
 
+    public DtoOrder(String fechaPedido, int totalPedido, boolean activo, String dniCliente, String cuit,
+            List<DtoOrderDetail> orderDetails) {
+        this.fechaPedido = fechaPedido;
+        this.totalPedido = totalPedido;
+        this.activo = activo;
+        this.dniCliente = dniCliente;
+        this.cuit = cuit;
+        this.orderDetails = orderDetails;
+    }
 
-    List<OrderDetail> orderDetails = new ArrayList<>();
+    public DtoOrder() {
+    }
+
+    public String getFechaPedido() {
+        return fechaPedido;
+    }
+
+    public void setFechaPedido(String fechaPedido) {
+        this.fechaPedido = fechaPedido;
+    }
+
+    public int getTotalPedido() {
+        return totalPedido;
+    }
+
+    public void setTotalPedido(int totalPedido) {
+        this.totalPedido = totalPedido;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    public String getDniCliente() {
+        return dniCliente;
+    }
+
+    public void setDniCliente(String dniCliente) {
+        this.dniCliente = dniCliente;
+    }
+
+    public String getCuit() {
+        return cuit;
+    }
+
+    public void setCuit(String cuit) {
+        this.cuit = cuit;
+    }
+
+    public List<DtoOrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(List<DtoOrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
+    }
+    
+
+    // fechaPedido!: string
+    // totalPedido!: number
+    // activo!: boolean
+    // dniCliente!: string
+    // cuit!: string
+    // dtoOrderDetails!: DtoOrderDetails[]
 
 
 }

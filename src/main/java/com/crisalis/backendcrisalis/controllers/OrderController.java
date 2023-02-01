@@ -1,8 +1,22 @@
 package com.crisalis.backendcrisalis.controllers;
 
+import com.crisalis.backendcrisalis.dto.DtoOrder;
+import com.crisalis.backendcrisalis.dto.DtoOrderDetail;
+import com.crisalis.backendcrisalis.models.Cliente;
+import com.crisalis.backendcrisalis.models.Empresa;
+import com.crisalis.backendcrisalis.models.OrderDetail;
+import com.crisalis.backendcrisalis.models.OrderE;
+import com.crisalis.backendcrisalis.models.Productos;
+import com.crisalis.backendcrisalis.models.Servicios;
+import com.crisalis.backendcrisalis.security.Controller.Mensaje;
+import com.crisalis.backendcrisalis.services.ClienteServices;
+import com.crisalis.backendcrisalis.services.EmpresaServices;
+import com.crisalis.backendcrisalis.services.OrderDetailServices;
+import com.crisalis.backendcrisalis.services.OrderServices;
+import com.crisalis.backendcrisalis.services.ProductosService;
+import com.crisalis.backendcrisalis.services.ServiciosServices;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,11 +26,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.crisalis.backendcrisalis.models.OrderDetail;
-import com.crisalis.backendcrisalis.models.OrderE;
-import com.crisalis.backendcrisalis.security.Controller.Mensaje;
-import com.crisalis.backendcrisalis.services.OrderDetailServices;
-import com.crisalis.backendcrisalis.services.OrderServices;
+
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:4200", "localhost"})
@@ -27,6 +37,18 @@ public class OrderController {
 
     @Autowired
     private OrderDetailServices orderDetailServices;
+
+    @Autowired
+    private ProductosService productosService;
+
+    @Autowired
+    private ServiciosServices serviciosServices;
+
+    @Autowired
+    private ClienteServices clienteServices;
+
+    @Autowired
+    private EmpresaServices empresaServices;
 
     @GetMapping("/traer/pedidos")
     public ResponseEntity<List<OrderE>> getOrders(){
@@ -49,6 +71,76 @@ public class OrderController {
        
 
         orderServices.saveOrder(order);
+        return new ResponseEntity<>(new Mensaje("El pedido fué creado"), HttpStatus.OK);
+    }
+
+    @PostMapping("/crear/dtopedido")
+    public ResponseEntity<?> crearDtoOrder(@RequestBody DtoOrder dtoOrder){
+
+        Cliente clienteAux = new Cliente();
+        Empresa empresaAux = new Empresa();
+        OrderE order = new OrderE();
+        List<OrderDetail> listaItems = new ArrayList<>();
+        List<DtoOrderDetail> listaItemsDto = new ArrayList<>();
+
+ 
+        OrderDetail itemPedido = new OrderDetail();
+        DtoOrderDetail itemPedidoDto = new DtoOrderDetail();
+
+         listaItemsDto = dtoOrder.getOrderDetails();
+
+        // System.out.println(dtoOrder.getOrderDetails());
+        // System.out.println(listaItemsDto);
+        clienteAux = clienteServices.findByDniCliente(dtoOrder.getDniCliente());
+        empresaAux = empresaServices.findEmpresaByCuit(dtoOrder.getCuit());
+        // Empiezo a formar el pedido a partir del dto
+        order.setFechaPedido(dtoOrder.getFechaPedido());
+        //order.setTotalPedido(dtoOrder.getTotalPedido());
+        order.setActivo(dtoOrder.isActivo());
+        order.setCliente(clienteAux);
+        order.setEmpresa(empresaAux);
+        
+       
+
+        
+
+        //Primero guardo el pedido y después los ítems
+        for(int i=0; i < listaItemsDto.size(); i++){
+
+            //Esto es para los items del detalle
+            Productos productoAux = new Productos();
+            Servicios servicioAux = new Servicios();
+
+            itemPedidoDto = listaItemsDto.get(i);
+
+            if(itemPedidoDto.isEsServicio()){
+                servicioAux = serviciosServices.getServicioByNombre(itemPedidoDto.getNombre());
+                productoAux = null;
+                itemPedido.setServicios(servicioAux);
+                itemPedido.setProductos(productoAux);
+
+            } else {
+                productoAux = productosService.getProductoByNombre(itemPedidoDto.getNombre());  
+                servicioAux = null;
+                itemPedido.setServicios(servicioAux);
+                itemPedido.setProductos(productoAux);
+            }
+
+            
+            itemPedido.setCantidad(itemPedidoDto.getCantidad());
+            itemPedido.setGarantia(itemPedidoDto.getGarantia());
+            itemPedido.setPrecioVenta(itemPedidoDto.getPrecioVenta());
+            itemPedido.setSoportePrecio(itemPedidoDto.getSoportePrecio());
+            
+            
+            listaItems.add(itemPedido);
+            
+        }
+
+         //order.setOrderDetails(listaItems);
+         // Guardo el pedido en DB
+         orderServices.saveOrder(order); 
+
         return new ResponseEntity<>(new Mensaje("El pedido fué creado"), HttpStatus.OK);
     }
 

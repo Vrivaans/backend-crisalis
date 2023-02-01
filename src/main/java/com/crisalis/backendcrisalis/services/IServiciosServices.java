@@ -19,4 +19,6 @@ public interface IServiciosServices {
 
     public List<Servicios>getServicios();
 
+    public Servicios getServicioByNombre(String nombre); 
+
 }

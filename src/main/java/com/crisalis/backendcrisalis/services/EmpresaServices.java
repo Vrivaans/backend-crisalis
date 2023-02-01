@@ -55,6 +55,12 @@ public class EmpresaServices implements IEmpresaServices{
 
         return listaEmpresasDto;
     }
+
+    @Override
+    public Empresa findEmpresaByCuit(String cuit) {
+        Empresa empresa = empresaRepository.findByCuit(cuit).orElse(null);
+        return empresa;
+    }
     
 
 }

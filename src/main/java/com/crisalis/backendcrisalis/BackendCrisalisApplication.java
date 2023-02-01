@@ -21,27 +21,4 @@ public class BackendCrisalisApplication {
 		SpringApplication.run(BackendCrisalisApplication.class, args);
 	}
 
-
-	/*
-	@Bean
-	CommandLineRunner commandLineRunner(
-		OrderDetailRepository orderDetailRepository,
-		ProductosRepository productosRepository
-	){
-		return args -> {
-			Productos productos = productosRepository.save(
-				new Productos (
-				null,
-				4.1,
-				"celular",	
-				false,
-				false,
-				false
-				)
-			);
-			OrderDetail orderDetail = orderDetailRepository.save(new OrderDetail(null, ))
-		}
-	}
-	*/
-
 }

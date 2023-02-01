@@ -54,5 +54,11 @@ public class ProductosService implements IProductosServices{
         List<Productos> listaProductos = productosRepository.findAll();
         return listaProductos;
     }
+
+    @Override
+    public Productos getProductoByNombre(String nombre) {
+        Productos producto = productosRepository.findProductoByNombre(nombre).orElse(null);
+        return producto;
+    }
     
 }

@@ -11,5 +11,6 @@ import com.crisalis.backendcrisalis.models.Productos;
 public interface ProductosRepository extends JpaRepository<Productos, Integer> {
     //public boolean existsByDniCliente(String dniCliente);
     //Para tratar de buscar cliente por dni
-    //public Optional<Productos> findByIdProducto(String dniCliente);
+    public Optional<Productos> findProductoByNombre(String nombre);
+
 }
