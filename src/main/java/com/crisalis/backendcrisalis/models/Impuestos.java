@@ -20,13 +20,13 @@ public class Impuestos {
 
     private String nombreImpuesto;
 
-    private double porcentaje;
+    private float porcentaje;
     
     public Impuestos (){
         
     }
 
-    public Impuestos(int id, String nombreImpuesto, double porcentaje) {
+    public Impuestos(int id, String nombreImpuesto, float porcentaje) {
         this.id = id;
         this.nombreImpuesto = nombreImpuesto;
         this.porcentaje = porcentaje;
@@ -48,11 +48,11 @@ public class Impuestos {
         this.nombreImpuesto = nombreImpuesto;
     }
 
-    public double getPorcentaje() {
+    public float getPorcentaje() {
         return porcentaje;
     }
 
-    public void setPorcentaje(double porcentaje) {
+    public void setPorcentaje(float porcentaje) {
         this.porcentaje = porcentaje;
     }
 }

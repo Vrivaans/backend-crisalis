@@ -18,8 +18,6 @@ import lombok.ToString;
 @Entity
 @Table(name = "servicios_contratados")
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor
 public class ServiciosContratados {
     
     @Id
@@ -39,6 +37,21 @@ public class ServiciosContratados {
     private Servicios servicio;
 
     private boolean activo;
+
+
+
+
+
+    public ServiciosContratados(int id, Cliente cliente, Empresa empresa, Servicios servicio, boolean activo) {
+        this.id = id;
+        this.cliente = cliente;
+        this.empresa = empresa;
+        this.servicio = servicio;
+        this.activo = activo;
+    }
+
+    public ServiciosContratados() {
+    }
 
     public int getId() {
         return id;

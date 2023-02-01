@@ -13,6 +13,8 @@ public interface IImpuestosServices {
 
     public Impuestos findImpuestos(int id);
 
+    // public Impuestos findByNombre(String nombreImpuesto);
+
     public boolean existById(int id);
 
     public Optional<Impuestos>getId(int id);

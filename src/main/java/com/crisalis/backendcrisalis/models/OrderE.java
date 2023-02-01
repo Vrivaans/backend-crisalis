@@ -29,7 +29,7 @@ public class OrderE {
 
     private String fechaPedido;
 
-    private int totalPedido;
+    private float totalPedido;
 
     // @Column(unique = true, nullable = false)
     // private String codigoIdentificador;
@@ -81,12 +81,12 @@ public class OrderE {
     }
 
 
-    public int getTotalPedido() {
+    public float getTotalPedido() {
         return totalPedido;
     }
 
 
-    public void setTotalPedido(int totalPedido) {
+    public void setTotalPedido(float totalPedido) {
         this.totalPedido = totalPedido;
     }
 

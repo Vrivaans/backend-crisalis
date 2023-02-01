@@ -57,4 +57,28 @@ public class SuperClaseProductos {
         this.nombre = nombre;
     }
 
+    public boolean isAplicaIva() {
+        return aplicaIva;
+    }
+
+    public void setAplicaIva(boolean aplicaIva) {
+        this.aplicaIva = aplicaIva;
+    }
+
+    public boolean isAplicaIBrutos() {
+        return aplicaIBrutos;
+    }
+
+    public void setAplicaIBrutos(boolean aplicaIBrutos) {
+        this.aplicaIBrutos = aplicaIBrutos;
+    }
+
+    public boolean isAplicaGanancias() {
+        return aplicaGanancias;
+    }
+
+    public void setAplicaGanancias(boolean aplicaGanancias) {
+        this.aplicaGanancias = aplicaGanancias;
+    }
+
 }

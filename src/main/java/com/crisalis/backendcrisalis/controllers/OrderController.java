@@ -9,6 +9,7 @@ import com.crisalis.backendcrisalis.models.OrderE;
 import com.crisalis.backendcrisalis.models.Productos;
 import com.crisalis.backendcrisalis.models.Servicios;
 import com.crisalis.backendcrisalis.security.Controller.Mensaje;
+import com.crisalis.backendcrisalis.services.CalculoPedido;
 import com.crisalis.backendcrisalis.services.ClienteServices;
 import com.crisalis.backendcrisalis.services.EmpresaServices;
 import com.crisalis.backendcrisalis.services.OrderDetailServices;
@@ -49,6 +50,9 @@ public class OrderController {
 
     @Autowired
     private EmpresaServices empresaServices;
+
+    @Autowired
+    private CalculoPedido calculoPedido;
 
     @GetMapping("/traer/pedidos")
     public ResponseEntity<List<OrderE>> getOrders(){
@@ -142,6 +146,18 @@ public class OrderController {
             
         }
         order.setOrderDetails(listaItems);
+
+        //Calculamos el pedido primero pero lo guardo en otro objeto
+        OrderE orderAux = new OrderE();
+        orderAux = calculoPedido.calcularPedido(order);
+        order.setTotalPedido(orderAux.getTotalPedido());
+        // orderAux.setFechaPedido(order.getFechaPedido());
+        // orderAux.setActivo(order.isActivo());
+        // orderAux.setCliente(order.getCliente());
+        // orderAux.setEmpresa(order.getEmpresa());
+        // orderAux.setOrderDetails(listaItems);
+        // orderAux.setTotalPedido();
+
          // Guardo el pedido en DB
          orderServices.saveOrder(order); 
 
