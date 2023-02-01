@@ -56,6 +56,9 @@ public class OrderController {
         return new ResponseEntity<>(listaOrders, HttpStatus.OK);
     }
 
+
+
+
     @PostMapping("/crear/pedido")
     public ResponseEntity<?> crearOrder(@RequestBody OrderE order){
         
@@ -84,7 +87,7 @@ public class OrderController {
         List<DtoOrderDetail> listaItemsDto = new ArrayList<>();
 
  
-        OrderDetail itemPedido = new OrderDetail();
+        
         DtoOrderDetail itemPedidoDto = new DtoOrderDetail();
 
          listaItemsDto = dtoOrder.getOrderDetails();
@@ -107,6 +110,7 @@ public class OrderController {
         //Primero guardo el pedido y después los ítems
         for(int i=0; i < listaItemsDto.size(); i++){
 
+            OrderDetail itemPedido = new OrderDetail();
             //Esto es para los items del detalle
             Productos productoAux = new Productos();
             Servicios servicioAux = new Servicios();
@@ -130,14 +134,14 @@ public class OrderController {
             itemPedido.setCantidad(itemPedidoDto.getCantidad());
             itemPedido.setGarantia(itemPedidoDto.getGarantia());
             itemPedido.setPrecioVenta(itemPedidoDto.getPrecioVenta());
-            itemPedido.setSoportePrecio(itemPedidoDto.getSoportePrecio());
+            itemPedido.setSoportePrecio(itemPedidoDto.getSoportePrecio());  
             
             
             listaItems.add(itemPedido);
+            orderDetailServices.saveOrderDetail(itemPedido);
             
         }
-
-         //order.setOrderDetails(listaItems);
+        order.setOrderDetails(listaItems);
          // Guardo el pedido en DB
          orderServices.saveOrder(order); 
 
