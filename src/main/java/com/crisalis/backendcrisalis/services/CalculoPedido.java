@@ -40,10 +40,16 @@ public class CalculoPedido {
             Impuestos iibb = new Impuestos();
     
     
-    
-            iva = impuestosServices.findImpuestos(1);
-            iibb = impuestosServices.findImpuestos(2);
-            ganancias = impuestosServices.findImpuestos(4);
+            //Si no anda buscar por nombre los impuestos entonces voy por los ID
+            // iva = impuestosServices.findImpuestos(1);
+            // iibb = impuestosServices.findImpuestos(2);
+            // ganancias = impuestosServices.findImpuestos(3);
+
+            iva = impuestosServices.findByNombre("iva");
+            iibb = impuestosServices.findByNombre("iibb");
+            ganancias = impuestosServices.findByNombre("ganancias"); 
+
+
 
             Productos productoAux = new Productos();
             Servicios servicioAux = new Servicios();

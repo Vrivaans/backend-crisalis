@@ -5,11 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+
 
 @Entity
 public class Impuestos {
@@ -18,7 +14,7 @@ public class Impuestos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String nombreImpuesto;
+    private String nombre;
 
     private float porcentaje;
     
@@ -26,9 +22,9 @@ public class Impuestos {
         
     }
 
-    public Impuestos(int id, String nombreImpuesto, float porcentaje) {
+    public Impuestos(int id, String nombre, float porcentaje) {
         this.id = id;
-        this.nombreImpuesto = nombreImpuesto;
+        this.nombre = nombre;
         this.porcentaje = porcentaje;
     }
 
@@ -40,12 +36,12 @@ public class Impuestos {
         this.id = id;
     }
 
-    public String getNombreImpuesto() {
-        return nombreImpuesto;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombreImpuesto(String nombreImpuesto) {
-        this.nombreImpuesto = nombreImpuesto;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public float getPorcentaje() {

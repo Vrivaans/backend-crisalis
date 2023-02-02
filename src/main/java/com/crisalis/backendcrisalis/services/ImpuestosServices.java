@@ -55,10 +55,10 @@ public class ImpuestosServices implements IImpuestosServices {
         
     }
 
-    // @Override
-    // public Impuestos findByNombre(String nombreImpuesto) {
-    //     Impuestos impuesto = impuestosRepository.findImpuestoByNombre(nombreImpuesto).orElse(null);
-    //     return impuesto;
-    // }
+    @Override
+    public Impuestos findByNombre(String nombre) {
+        Impuestos impuesto = impuestosRepository.findByNombre(nombre).orElse(null);
+        return impuesto;
+    }
     
 }

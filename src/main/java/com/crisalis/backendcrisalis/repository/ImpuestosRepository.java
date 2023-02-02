@@ -10,5 +10,5 @@ import com.crisalis.backendcrisalis.models.Impuestos;
 @Repository
 public interface ImpuestosRepository extends JpaRepository<Impuestos, Integer> {
 
-    //public Optional<Impuestos> findImpuestoByNombre(String nombreImpuesto);
+    public Optional<Impuestos> findByNombre(String nombre);
 }

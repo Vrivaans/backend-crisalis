@@ -8,6 +8,7 @@ import com.crisalis.backendcrisalis.models.OrderDetail;
 import com.crisalis.backendcrisalis.models.OrderE;
 import com.crisalis.backendcrisalis.models.Productos;
 import com.crisalis.backendcrisalis.models.Servicios;
+import com.crisalis.backendcrisalis.models.ServiciosContratados;
 import com.crisalis.backendcrisalis.security.Controller.Mensaje;
 import com.crisalis.backendcrisalis.services.CalculoPedido;
 import com.crisalis.backendcrisalis.services.ClienteServices;
@@ -15,6 +16,7 @@ import com.crisalis.backendcrisalis.services.EmpresaServices;
 import com.crisalis.backendcrisalis.services.OrderDetailServices;
 import com.crisalis.backendcrisalis.services.OrderServices;
 import com.crisalis.backendcrisalis.services.ProductosService;
+import com.crisalis.backendcrisalis.services.ServiciosContratadosServices;
 import com.crisalis.backendcrisalis.services.ServiciosServices;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +55,9 @@ public class OrderController {
 
     @Autowired
     private CalculoPedido calculoPedido;
+
+    @Autowired
+    private ServiciosContratadosServices servicesContratadosServices;
 
     @GetMapping("/traer/pedidos")
     public ResponseEntity<List<OrderE>> getOrders(){
@@ -126,6 +131,26 @@ public class OrderController {
                 productoAux = null;
                 itemPedido.setServicios(servicioAux);
                 itemPedido.setProductos(productoAux);
+                //Guardamos el servicio contratado en la base de datos
+                //Primero hay que saber si contrató un cliente o una empresa
+                if(clienteAux != null){
+                    ServiciosContratados servicioContratado = new ServiciosContratados();
+                    servicioContratado.setCliente(clienteAux);
+                    servicioContratado.setEmpresa(null);
+                    servicioContratado.setServicio(servicioAux);
+                    servicioContratado.setActivo(false);
+                    servicesContratadosServices.saveServicioContratado(servicioContratado);
+                }
+
+                if(empresaAux != null){
+                    ServiciosContratados servicioContratado = new ServiciosContratados();
+                    servicioContratado.setCliente(null);
+                    servicioContratado.setEmpresa(empresaAux);
+                    servicioContratado.setServicio(servicioAux);
+                    servicioContratado.setActivo(false);
+                    servicesContratadosServices.saveServicioContratado(servicioContratado);
+                }
+
 
             } else {
                 productoAux = productosService.getProductoByNombre(itemPedidoDto.getNombre());  
