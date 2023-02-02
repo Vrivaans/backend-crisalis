@@ -14,10 +14,10 @@ public interface ServiciosContratadosRepository extends JpaRepository<ServiciosC
     
     //Querys nativas para obtener una lista con los servicios contratados por una empresa y un cliente 
     
-    @Query(value = "{call servicios_contratados_por_cliente(:idIn)}", nativeQuery = true)
+    @Query(value = "{call servicios_contratados_por_cliente(:id)}", nativeQuery = true)
     List<ServiciosContratados> ServiciosContratadosPorCliente(int id);
 
-    @Query(value = "{call servicios_contratados_por_empresa(:idIn)}", nativeQuery = true)
+    @Query(value = "{call servicios_contratados_por_empresa(:id)}", nativeQuery = true)
     List<ServiciosContratados> ServiciosContratadosPorEmpresa(int id);
 
 }

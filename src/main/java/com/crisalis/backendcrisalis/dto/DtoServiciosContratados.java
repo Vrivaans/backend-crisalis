@@ -12,6 +12,11 @@ public class DtoServiciosContratados {
     // precioBase!: number
     // soportePrecio!: number
 
+    private int id;
+
+
+
+
     private String nombre;
 
     private String apellido;
@@ -28,13 +33,19 @@ public class DtoServiciosContratados {
 
     private float soportePrecio;
 
+    private boolean activo;
+
     
 
 
 
 
-    public DtoServiciosContratados(String nombre, String apellido, String dniCliente, String razonSocial,
-            String cuit, String nombreServicio, float precioBase, float soportePrecio) {
+
+
+
+    public DtoServiciosContratados(int id, String nombre, String apellido, String dniCliente, String razonSocial,
+            String cuit, String nombreServicio, float precioBase, float soportePrecio, boolean activo) {
+        this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dniCliente = dniCliente;
@@ -43,11 +54,23 @@ public class DtoServiciosContratados {
         this.nombreServicio = nombreServicio;
         this.precioBase = precioBase;
         this.soportePrecio = soportePrecio;
+        this.activo = activo;
     }
 
 
 
     public DtoServiciosContratados() {
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     
@@ -123,6 +146,17 @@ public class DtoServiciosContratados {
     public void setCuit(String cuit) {
         this.cuit = cuit;
     }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
 
 
     
