@@ -139,6 +139,7 @@ public class OrderController {
                     servicioContratado.setEmpresa(null);
                     servicioContratado.setServicio(servicioAux);
                     servicioContratado.setActivo(false);
+                    servicioContratado.setMonto(0);
                     servicesContratadosServices.saveServicioContratado(servicioContratado);
                 }
 
@@ -148,6 +149,7 @@ public class OrderController {
                     servicioContratado.setEmpresa(empresaAux);
                     servicioContratado.setServicio(servicioAux);
                     servicioContratado.setActivo(false);
+                    servicioContratado.setMonto(0);
                     servicesContratadosServices.saveServicioContratado(servicioContratado);
                 }
 

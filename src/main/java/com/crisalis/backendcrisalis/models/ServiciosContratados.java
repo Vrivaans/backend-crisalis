@@ -38,16 +38,20 @@ public class ServiciosContratados {
 
     private boolean activo;
 
+    private float monto;
 
 
 
 
-    public ServiciosContratados(int id, Cliente cliente, Empresa empresa, Servicios servicio, boolean activo) {
+
+
+    public ServiciosContratados(int id, Cliente cliente, Empresa empresa, Servicios servicio, boolean activo, float monto) {
         this.id = id;
         this.cliente = cliente;
         this.empresa = empresa;
         this.servicio = servicio;
         this.activo = activo;
+        this.monto = monto;
     }
 
     public ServiciosContratados() {
@@ -93,5 +97,13 @@ public class ServiciosContratados {
         this.activo = activo;
     }
 
+
+    public float getMonto() {
+        return monto;
+    }
+
+    public void setMonto(float monto) {
+        this.monto = monto;
+    }
     
 }
