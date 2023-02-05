@@ -13,7 +13,9 @@ import lombok.ToString;
 public class DtoOrder {
     
 
-    //private int id; 
+    private int id; 
+
+
 
     private String fechaPedido;
 
@@ -27,8 +29,9 @@ public class DtoOrder {
 
     List<DtoOrderDetail> orderDetails = new ArrayList<>();
 
-    public DtoOrder(String fechaPedido, int totalPedido, boolean activo, String dniCliente, String cuit,
+    public DtoOrder(int id,String fechaPedido, int totalPedido, boolean activo, String dniCliente, String cuit,
             List<DtoOrderDetail> orderDetails) {
+        this.id = id;
         this.fechaPedido = fechaPedido;
         this.totalPedido = totalPedido;
         this.activo = activo;
@@ -38,6 +41,14 @@ public class DtoOrder {
     }
 
     public DtoOrder() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFechaPedido() {
