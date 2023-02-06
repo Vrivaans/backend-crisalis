@@ -25,6 +25,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -65,26 +66,71 @@ public class OrderController {
         return new ResponseEntity<>(listaOrders, HttpStatus.OK);
     }
 
+    @GetMapping("/traer/detalles/{id}")
+    public ResponseEntity<List<DtoOrderDetail>> traerDetalles(@PathVariable("id") int id){
+        OrderE order = new OrderE();
+        order = orderServices.findOrder(id);
+        List<DtoOrderDetail> listaDetallesDto = new ArrayList<>();
+        List<OrderDetail> lista = new ArrayList<>();
+        lista = order.getOrderDetails();
+        listaDetallesDto = orderServices.convertListToDtoList(lista);
 
 
+        return new ResponseEntity<>(listaDetallesDto, HttpStatus.OK);
+    }
 
-    @PostMapping("/crear/pedido")
-    public ResponseEntity<?> crearOrder(@RequestBody OrderE order){
+    @GetMapping("/estado/pedido/{id}")
+    public ResponseEntity<?> estadoPedido(@PathVariable("id") int id){
+        if(!orderServices.existById(id)){
+            return new ResponseEntity(new Mensaje("El ID no existe"), HttpStatus.BAD_REQUEST);
+        }
+
+        OrderE order = orderServices.findOrder(id);
         
-        List<OrderDetail> listaDetalles = new ArrayList<>();
-        listaDetalles = order.getOrderDetails();
+
+        if(order.isActivo()){
+            order.setActivo(false);
+        } else {
+            order.setActivo(true);
+        }
+        orderServices.saveOrder(order);
+
+
+        return new ResponseEntity(new Mensaje("Estado del pedido actualizado"), HttpStatus.OK);
+    }
+
+    @GetMapping("/traer/pedidos/cliente/{id}")
+    public ResponseEntity<List<OrderE>> pedidosCliente(@PathVariable("id") int id){
+        List<OrderE> listaPedidosCliente = orderServices.pedidosCliente(id);
+        return new ResponseEntity<>(listaPedidosCliente, HttpStatus.OK);
+    }
+    
+    @GetMapping("/traer/pedidos/empresa/{id}")
+    public ResponseEntity<List<OrderE>> pedidosEmpresa(@PathVariable("id") int id){
+        List<OrderE> listaPedidosEmpresa = orderServices.pedidosEmpresa(id);
+        return new ResponseEntity<>(listaPedidosEmpresa, HttpStatus.OK);
+    }
+
+
+
+
+    // @PostMapping("/crear/pedido")
+    // public ResponseEntity<?> crearOrder(@RequestBody OrderE order){
         
-         for(int i=0; i<listaDetalles.size(); i++){
-            listaDetalles.get(i);
-            OrderDetail orderDetail = listaDetalles.get(i);
-            orderDetailServices.saveOrderDetail(orderDetail);
-        }    
+    //     List<OrderDetail> listaDetalles = new ArrayList<>();
+    //     listaDetalles = order.getOrderDetails();
+        
+    //      for(int i=0; i<listaDetalles.size(); i++){
+    //         listaDetalles.get(i);
+    //         OrderDetail orderDetail = listaDetalles.get(i);
+    //         orderDetailServices.saveOrderDetail(orderDetail);
+    //     }    
 
        
 
-        orderServices.saveOrder(order);
-        return new ResponseEntity<>(new Mensaje("El pedido fué creado"), HttpStatus.OK);
-    }
+    //     orderServices.saveOrder(order);
+    //     return new ResponseEntity<>(new Mensaje("El pedido fué creado"), HttpStatus.OK);
+    // }
 
     @PostMapping("/crear/dtopedido")
     public ResponseEntity<?> crearDtoOrder(@RequestBody DtoOrder dtoOrder){
