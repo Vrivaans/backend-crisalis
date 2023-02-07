@@ -9,7 +9,10 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.crisalis.backendcrisalis.dto.DtoOrder;
 import com.crisalis.backendcrisalis.dto.DtoOrderDetail;
+import com.crisalis.backendcrisalis.models.Cliente;
+import com.crisalis.backendcrisalis.models.Empresa;
 import com.crisalis.backendcrisalis.models.OrderDetail;
 import com.crisalis.backendcrisalis.models.OrderE;
 import com.crisalis.backendcrisalis.models.Productos;
@@ -22,6 +25,21 @@ public class OrderServices implements IOrderServices {
 
     @Autowired
     private OrderRepository orderRepository;
+
+    @Autowired
+    private OrderDetailServices orderDetailServices;
+
+    @Autowired
+    private ProductosService productosService;
+
+    @Autowired
+    private ServiciosServices serviciosServices;
+
+    @Autowired
+    private ClienteServices clienteServices;
+
+    @Autowired
+    private EmpresaServices empresaServices;
 
     @Override
     public void saveOrder(OrderE order) {
@@ -101,6 +119,67 @@ public class OrderServices implements IOrderServices {
     public List<OrderE> pedidosEmpresa(int id) {
         List<OrderE> listaPedidosEmpresa = orderRepository.pedidosEmpresa(id);
         return listaPedidosEmpresa;
+    }
+
+    @Override
+    public OrderE converDtoOrderToOrder(DtoOrder dtoOrder) {
+        OrderE order = new OrderE();
+
+        Cliente clienteAux = new Cliente();
+        Empresa empresaAux = new Empresa();
+        
+        List<OrderDetail> listaItems = new ArrayList<>();
+        List<DtoOrderDetail> listaItemsDto = new ArrayList<>();
+
+        DtoOrderDetail itemPedidoDto = new DtoOrderDetail();
+
+         listaItemsDto = dtoOrder.getOrderDetails();
+         clienteAux = clienteServices.findByDniCliente(dtoOrder.getDniCliente());
+         empresaAux = empresaServices.findEmpresaByCuit(dtoOrder.getCuit());
+
+         for(int i=0; i < listaItemsDto.size(); i++){
+
+            OrderDetail itemPedido = new OrderDetail();
+            //Esto es para los items del detalle
+            Productos productoAux = new Productos();
+            Servicios servicioAux = new Servicios();
+
+            itemPedidoDto = listaItemsDto.get(i);
+
+            if(itemPedidoDto.isEsServicio()){
+                servicioAux = serviciosServices.getServicioByNombre(itemPedidoDto.getNombre());
+                productoAux = null;
+                itemPedido.setServicios(servicioAux);
+                itemPedido.setProductos(productoAux);
+            } else {
+                productoAux = productosService.getProductoByNombre(itemPedidoDto.getNombre());  
+                servicioAux = null;
+                itemPedido.setServicios(servicioAux);
+                itemPedido.setProductos(productoAux);
+            }
+
+            
+            itemPedido.setCantidad(itemPedidoDto.getCantidad());
+            itemPedido.setGarantia(itemPedidoDto.getGarantia());
+            itemPedido.setPrecioVenta(itemPedidoDto.getPrecioVenta());
+            itemPedido.setSoportePrecio(itemPedidoDto.getSoportePrecio());  
+            
+            
+            listaItems.add(itemPedido);
+            orderDetailServices.saveOrderDetail(itemPedido);
+            
+        }
+        order.setFechaPedido(dtoOrder.getFechaPedido());
+        order.setTotalPedido(dtoOrder.getTotalPedido());
+        order.setActivo(dtoOrder.isActivo());
+        order.setCliente(clienteAux);
+        order.setEmpresa(empresaAux);
+        order.setOrderDetails(listaItems);
+        
+
+
+
+        return order;
     }
 
     

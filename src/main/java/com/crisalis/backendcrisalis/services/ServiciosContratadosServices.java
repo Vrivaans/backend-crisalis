@@ -9,9 +9,12 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.crisalis.backendcrisalis.dto.DtoOrder;
+import com.crisalis.backendcrisalis.dto.DtoOrderDetail;
 import com.crisalis.backendcrisalis.dto.DtoServiciosContratados;
 import com.crisalis.backendcrisalis.models.Cliente;
 import com.crisalis.backendcrisalis.models.Empresa;
+import com.crisalis.backendcrisalis.models.OrderE;
 import com.crisalis.backendcrisalis.models.Servicios;
 import com.crisalis.backendcrisalis.models.ServiciosContratados;
 import com.crisalis.backendcrisalis.repository.ServiciosContratadosRepository;
@@ -22,6 +25,15 @@ public class ServiciosContratadosServices implements IServiciosContratadosServic
 
     @Autowired
     private ServiciosContratadosRepository serviciosContratadosRepository;
+
+    @Autowired
+    private ServiciosServices serviciosServices;
+
+    @Autowired
+    private ClienteServices clienteServices;
+
+    @Autowired
+    private EmpresaServices empresaServices;
 
     @Override
     public void saveServicioContratado(ServiciosContratados servicioContratado) {
@@ -167,5 +179,59 @@ public class ServiciosContratadosServices implements IServiciosContratadosServic
         return dtoListaServiciosEmpresa;
 
     }
+
+    @Override
+    public void saveServiceOfOrder(DtoOrder dtoOrder) {
+        // TODO Auto-generated method stub
+        List<DtoOrderDetail> listaItemsDto = new ArrayList<>();
+        DtoOrderDetail itemPedidoDto = new DtoOrderDetail();
+        listaItemsDto = dtoOrder.getOrderDetails();
+
+
+        Cliente clienteAux = new Cliente();
+        Empresa empresaAux = new Empresa();
+        clienteAux = clienteServices.findByDniCliente(dtoOrder.getDniCliente());
+        empresaAux = empresaServices.findEmpresaByCuit(dtoOrder.getCuit());
+
+        for(int i=0; i < listaItemsDto.size(); i++){
+
+            // OrderDetail itemPedido = new OrderDetail();
+            //Esto es para los items del detalle
+            
+            Servicios servicioAux = new Servicios();
+
+            itemPedidoDto = listaItemsDto.get(i);
+
+            if(itemPedidoDto.isEsServicio()){
+                servicioAux = serviciosServices.getServicioByNombre(itemPedidoDto.getNombre());
+
+                //Guardamos el servicio contratado en la base de datos
+                //Primero hay que saber si contrató un cliente o una empresa
+                if(clienteAux != null){
+                    ServiciosContratados servicioContratado = new ServiciosContratados();
+                    servicioContratado.setCliente(clienteAux);
+                    servicioContratado.setEmpresa(null);
+                    servicioContratado.setServicio(servicioAux);
+                    servicioContratado.setActivo(false);
+                   
+                    this.saveServicioContratado(servicioContratado);
+                }
+
+                if(empresaAux != null){
+                    ServiciosContratados servicioContratado = new ServiciosContratados();
+                    servicioContratado.setCliente(null);
+                    servicioContratado.setEmpresa(empresaAux);
+                    servicioContratado.setServicio(servicioAux);
+                    servicioContratado.setActivo(false);
+                    
+                    this.saveServicioContratado(servicioContratado);
+                }
+
+       
+        
+            }
     
+        }
+    
+    }
 }

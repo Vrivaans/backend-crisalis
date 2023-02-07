@@ -58,7 +58,7 @@ public class OrderController {
     private CalculoPedido calculoPedido;
 
     @Autowired
-    private ServiciosContratadosServices servicesContratadosServices;
+    private ServiciosContratadosServices serviciosContratadosServices;
 
     @GetMapping("/traer/pedidos")
     public ResponseEntity<List<OrderE>> getOrders(){
@@ -113,27 +113,15 @@ public class OrderController {
 
 
 
-
-    // @PostMapping("/crear/pedido")
-    // public ResponseEntity<?> crearOrder(@RequestBody OrderE order){
-        
-    //     List<OrderDetail> listaDetalles = new ArrayList<>();
-    //     listaDetalles = order.getOrderDetails();
-        
-    //      for(int i=0; i<listaDetalles.size(); i++){
-    //         listaDetalles.get(i);
-    //         OrderDetail orderDetail = listaDetalles.get(i);
-    //         orderDetailServices.saveOrderDetail(orderDetail);
-    //     }    
-
-       
-
-    //     orderServices.saveOrder(order);
-    //     return new ResponseEntity<>(new Mensaje("El pedido fué creado"), HttpStatus.OK);
-    // }
-
     @PostMapping("/crear/dtopedido")
     public ResponseEntity<?> crearDtoOrder(@RequestBody DtoOrder dtoOrder){
+
+        // OrderE order = new OrderE();
+        // order = orderServices.converDtoOrderToOrder(dtoOrder);
+        // order = calculoPedido.calcularPedido(order);
+        // serviciosContratadosServices.saveServiceOfOrder(dtoOrder);
+        // orderServices.saveOrder(order);
+        
 
         Cliente clienteAux = new Cliente();
         Empresa empresaAux = new Empresa();
@@ -186,7 +174,7 @@ public class OrderController {
                     servicioContratado.setServicio(servicioAux);
                     servicioContratado.setActivo(false);
                    
-                    servicesContratadosServices.saveServicioContratado(servicioContratado);
+                    serviciosContratadosServices.saveServicioContratado(servicioContratado);
                 }
 
                 if(empresaAux != null){
@@ -196,7 +184,7 @@ public class OrderController {
                     servicioContratado.setServicio(servicioAux);
                     servicioContratado.setActivo(false);
                     
-                    servicesContratadosServices.saveServicioContratado(servicioContratado);
+                    serviciosContratadosServices.saveServicioContratado(servicioContratado);
                 }
 
 
@@ -239,21 +227,5 @@ public class OrderController {
 
 
 
-    /* Espacio para probar los OrderDetails
-     * 
-     
-    @PostMapping("/crear/detalles")
-    //public ResponseEntity <?> crearDetalles(@RequestBody List<OrderDetail> listaDetalles){
-        public ResponseEntity <?> crearDetalles(@RequestBody OrderDetail listaDetalles){
 
-            orderDetailServices.saveOrderDetail(listaDetalles);
-        //  for(int i=0; i<listaDetalles.size(); i++){
-        //     listaDetalles.get(i);
-        //     OrderDetail orderDetail = listaDetalles.get(i);
-        //     orderDetailServices.saveOrderDetail(orderDetail);
-        // }    
-
-        return new ResponseEntity<>(new Mensaje("Se agregaron los items"), HttpStatus.OK);
-    }
-    */
 }
