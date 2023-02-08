@@ -46,7 +46,7 @@ public class ServiciosContratadosController {
         return new ResponseEntity<>(dtoListaServiciosCliente, HttpStatus.OK);
     }
 
-    @PutMapping("/estado/servicio/{id}")
+    @GetMapping("/estado/servicio/{id}")
     public ResponseEntity<?> actualizarServicio(@PathVariable("id") int id){
 
         if(!serviciosContratadosServices.existById(id)){
