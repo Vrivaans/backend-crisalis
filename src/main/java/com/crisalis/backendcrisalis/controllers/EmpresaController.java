@@ -33,6 +33,18 @@ public class EmpresaController {
         return new ResponseEntity<>(listaEmpresas, HttpStatus.OK);
     }
 
+
+    @GetMapping("/detail-empresa/{id}")
+    public ResponseEntity<Empresa> getById(@PathVariable ("id")int id){
+        if(!iEmpresaServices.existById(id)){
+            return new ResponseEntity(new Mensaje("El id no existe"), HttpStatus.NOT_FOUND);
+        }
+        Empresa empresa = iEmpresaServices.getId(id).get();
+        return new ResponseEntity<Empresa>(empresa, HttpStatus.OK);
+        
+
+    }
+
     @DeleteMapping("/borrar/empresa/{id}")
     public ResponseEntity<?> borrarEmpresa(@PathVariable("id") int id){
         if(!iEmpresaServices.existById(id)){

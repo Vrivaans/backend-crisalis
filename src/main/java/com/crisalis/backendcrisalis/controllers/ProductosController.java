@@ -47,16 +47,17 @@ public class ProductosController {
         List<Productos> lista = iProductosServices.getProductos();
         return new ResponseEntity<>(lista, HttpStatus.OK);
     }
-    // @GetMapping("/detail/{id}")
-    // public ResponseEntity<Productos> getById(@PathVariable ("id")int id){
-    //     if(!iProductosServices.existById(id)){
-    //         return new ResponseEntity(new Mensaje("El id no existe"), HttpStatus.NOT_FOUND);
-    //     }
-    //     Productos producto = iProductosServices.getId(id).get();
-    //     return new ResponseEntity<Productos>(producto, HttpStatus.OK);
+
+    @GetMapping("/detail-producto/{id}")
+    public ResponseEntity<Productos> getById(@PathVariable ("id")int id){
+        if(!iProductosServices.existById(id)){
+            return new ResponseEntity(new Mensaje("El id no existe"), HttpStatus.NOT_FOUND);
+        }
+        Productos producto = iProductosServices.getId(id).get();
+        return new ResponseEntity<Productos>(producto, HttpStatus.OK);
         
 
-    // }
+    }
 
 
 
@@ -79,12 +80,13 @@ public class ProductosController {
 
                 // iClienteServices.saveCliente(cliente1);
 
-                Productos producto1 = new Productos();
+                Productos producto1 = iProductosServices.getId(id).get();
                 producto1.setNombre(producto.getNombre());
                 producto1.setPrecioBase(producto.getPrecioBase());
                 producto1.setAplicaGanancias(producto.isAplicaGanancias());
                 producto1.setAplicaIBrutos(producto.isAplicaIBrutos());
                 producto1.setAplicaIva(producto.isAplicaIva());
+                iProductosServices.saveProducto(producto1);
 
 
                 return new ResponseEntity(new  Mensaje("El usuario fué actualizado correctamente"),HttpStatus.OK);

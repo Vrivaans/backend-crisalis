@@ -20,7 +20,7 @@ public class Servicios extends SuperClaseProductos {
     
     @Column(name = "soporte_precio")
     @NotNull
-    private int soportePrecio;
+    private float soportePrecio;
 
     public Servicios(){
 
@@ -36,7 +36,7 @@ public class Servicios extends SuperClaseProductos {
         return soportePrecio;
     }
 
-    public void setSoportePrecio(int soportePrecio) {
+    public void setSoportePrecio(float soportePrecio) {
         this.soportePrecio = soportePrecio;
     }
 
