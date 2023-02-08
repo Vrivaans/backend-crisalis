@@ -56,6 +56,9 @@ public class EmpresaController {
         }
 
         Empresa empresa1 = iEmpresaServices.getId(id).get();
+        empresa1.setApellido(empresa.getApellido());
+        empresa1.setDniCliente(empresa.getDniCliente());
+        empresa1.setNombre(empresa.getNombre());
         empresa1.setCuit(empresa.getCuit());
         empresa1.setFechaInicioActividades(empresa.getFechaInicioActividades());
         empresa1.setRazonSocial(empresa.getRazonSocial());

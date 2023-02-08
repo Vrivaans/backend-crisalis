@@ -25,34 +25,7 @@ import com.crisalis.backendcrisalis.services.IClienteServices;
 @CrossOrigin(origins = {"http://localhost:4200", "localhost"})
 public class ClienteController {
     @Autowired
-    private IClienteServices iClienteServices;
-
-    //No me sale con el DTO asi que lo tengo que arreglar, tengo problemas con el constructor
-    /*@PostMapping("/crear/cliente")
-    public ResponseEntity<?> crearCliente(@RequestBody DtoCliente dtoCliente){
-        if(StringUtils.isBlank(dtoCliente.getNombre())){
-            return new ResponseEntity(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST); 
-        }
-        if(StringUtils.isBlank(dtoCliente.getApellido())){
-            return new ResponseEntity(new Mensaje("El apellido es obligatorio"), HttpStatus.BAD_REQUEST); 
-        }
-        
-        int dniClienteInt = dtoCliente.getDniCliente();
-        String dniClienteString = String.valueOf(dniClienteInt);
-
-        if(StringUtils.isBlank(dniClienteString)){
-            return new ResponseEntity(new Mensaje("El dni es obligatorio"), HttpStatus.BAD_REQUEST); 
-        }
-
-        Cliente cliente = new Cliente(dtoCliente.getDniCliente(), dtoCliente.getNombre(), dtoCliente.getApellido());
-
-        iClienteServices.saveCliente(cliente);
-        return new ResponseEntity(new Mensaje("El cliente fué agregado"), HttpStatus.OK);
-    } */
-
-
-   
-
+    private IClienteServices iClienteServices;  
 
     @PostMapping("/crear/cliente")
     public ResponseEntity<?> crearCliente(@RequestBody Cliente cliente){
@@ -94,22 +67,15 @@ public class ClienteController {
         //Compruebo si existe el id
         if(!iClienteServices.existById(id))
             return new ResponseEntity(new Mensaje("El id no existe"), HttpStatus.BAD_REQUEST); 
-        if(iClienteServices.existsByDniCliente(cliente.getDniCliente()))
-            return new ResponseEntity(new Mensaje("Hay un usuario con este dni"), HttpStatus.BAD_REQUEST);
+        // if(iClienteServices.existsByDniCliente(cliente.getDniCliente()))
+        //     return new ResponseEntity(new Mensaje("Hay un usuario con este dni"), HttpStatus.BAD_REQUEST);
 
-            //Estas validaciones no son correctas porque no manejé IsBlank con los atributos de cliente, deberían ser del DTO
-            //if(StringUtils.isBlank(cliente.getApellido()))
-            //    return new ResponseEntity(new Mensaje("El apellido es obligatorio"), HttpStatus.BAD_REQUEST);
-            //
-            //
-            //if(StringUtils.isBlank(cliente.getNombre()))
-            //    return new ResponseEntity(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
-        
 
                 Cliente cliente1 = iClienteServices.getId(id).get();
                 cliente1.setApellido(cliente.getApellido());
                 cliente1.setDniCliente(cliente.getDniCliente());
                 cliente1.setNombre(cliente.getNombre());
+                
 
                 iClienteServices.saveCliente(cliente1);
 

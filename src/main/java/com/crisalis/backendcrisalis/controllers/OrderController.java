@@ -18,6 +18,8 @@ import com.crisalis.backendcrisalis.services.OrderServices;
 import com.crisalis.backendcrisalis.services.ProductosService;
 import com.crisalis.backendcrisalis.services.ServiciosContratadosServices;
 import com.crisalis.backendcrisalis.services.ServiciosServices;
+
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,6 +111,22 @@ public class OrderController {
     public ResponseEntity<List<OrderE>> pedidosEmpresa(@PathVariable("id") int id){
         List<OrderE> listaPedidosEmpresa = orderServices.pedidosEmpresa(id);
         return new ResponseEntity<>(listaPedidosEmpresa, HttpStatus.OK);
+    }
+
+    @GetMapping("/calcular/dtopedido")
+    public ResponseEntity<String> calcularPedido(@RequestBody DtoOrder dtoOrder){
+        OrderE order = new OrderE();
+        order = orderServices.converDtoOrderToOrder(dtoOrder);
+        order = calculoPedido.calcularPedido(order);
+        float totalPedido = order.getTotalPedido();
+        // int totalPedidoInt;
+        // totalPedidoInt =  (int)totalPedido;
+        String totalPedidoString = new DecimalFormat("#.00").format(totalPedido);
+        
+
+
+
+        return new ResponseEntity<String>(totalPedidoString, HttpStatus.OK);
     }
 
 
